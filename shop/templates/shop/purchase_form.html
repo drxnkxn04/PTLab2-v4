@@ -1,28 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Покупка</title>
-</head>
-<body>
-    <div>
-        <h3>Покупка</h3>
-        <form method="post">{% csrf_token %}
-            <input type="hidden" value="{{ view.kwargs.product_id }}" name="product" />
-            <table>
-                <tr>
-                    <td><p>Введите свое имя </p></td>
-                    <td><input type="text" name="person" /> </td>
-                </tr>
-                <tr>
-                    <td><p>Введите адрес доставки:</p></td>
-                    <td>
-                        <input type="text" name="address" />
-                    </td>
-                </tr>
-                <tr><td><input type="submit" value="Отправить" /> </td><td></td></tr>
-            </table>
+{% extends 'shop/base.html' %}
+
+{% block title %}Оформление покупки · Дом и быт{% endblock %}
+
+{% block content %}
+    <section class="panel form-panel" aria-labelledby="checkout-title">
+        <a href="{% url 'index' %}">В каталог</a>
+        <h1 id="checkout-title">Оформление покупки</h1>
+        <h2>{{ product.name }}</h2>
+        <dl class="summary">
+            <div><dt>Цена</dt><dd>{{ quote.base_price|floatformat:2 }} ₽</dd></div>
+            <div><dt>Ваша скидка</dt><dd>{{ quote.discount_percent }}%</dd></div>
+            <div class="total"><dt>Итого</dt><dd>{{ quote.total|floatformat:2 }} ₽</dd></div>
+        </dl>
+        <form method="post" class="form-fields">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <button class="button" type="submit">Подтвердить покупку</button>
         </form>
-    </div>
-</body>
-</html>
+    </section>
+{% endblock %}

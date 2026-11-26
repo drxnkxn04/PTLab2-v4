@@ -1,0 +1,15 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Регистрация · Дом и быт{% endblock %}
+
+{% block content %}
+    <section class="panel form-panel" aria-labelledby="register-title">
+        <h1 id="register-title">Регистрация</h1>
+        <form method="post" class="form-fields">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <button class="button" type="submit">Создать аккаунт</button>
+        </form>
+        <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
+    </section>
+{% endblock %}

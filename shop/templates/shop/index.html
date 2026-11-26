@@ -1,26 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Товары</title>
-</head>
-<body>
-    <div>
-        <h3>Список</h3>
-        <table>
-            <tr>
-                <td><p>Наименование</p></td>
-                <td><p>Цена</p></td>
-                <td></td>
-            </tr>
-            {% for p in products %}
-                <tr>
-                    <td><p>{{ p.name }}</p></td>
-                    <td><p>{{ p.price }}</p></td>
-                    <td><p><a href="/buy/{{ p.id }}">Купить</a></p></td>
-                </tr>
+{% extends 'shop/base.html' %}
+
+{% block content %}
+    <section class="hero" aria-labelledby="shop-title">
+        <div>
+            <h1 id="shop-title">Товары для дома</h1>
+            <p>Для кухни, хранения и ухода за домом.</p>
+        </div>
+        <div class="loyalty">
+            <h2>Накопительная скидка</h2>
+            <dl class="tiers">
+                {% for minimum, percent in tiers %}
+                    <div><dt>От {{ minimum }} покупок</dt><dd>{{ percent }}%</dd></div>
+                {% endfor %}
+            </dl>
+            {% if user.is_authenticated %}
+                <p>Ваша скидка на следующую покупку — <strong>{{ discount }}%</strong></p>
+            {% endif %}
+        </div>
+    </section>
+    <section aria-labelledby="catalog-title">
+        <h2 id="catalog-title" class="section-title">Каталог</h2>
+        <div class="catalog">
+            {% for product in products %}
+                <article class="product panel">
+                    {% if product.category %}<p class="category">{{ product.category }}</p>{% endif %}
+                    <h3>{{ product.name }}</h3>
+                    {% if product.description %}<p class="muted">{{ product.description }}</p>{% endif %}
+                    <div class="product-footer">
+                        <strong class="price">{{ product.price }} ₽</strong>
+                        <a class="button" href="{% url 'buy' product.id %}"
+                           aria-label="Купить {{ product.name }}">Купить</a>
+                    </div>
+                </article>
+            {% empty %}
+                <p>В каталоге пока нет товаров.</p>
             {% endfor %}
-        </table>
-    </div>
-</body>
-</html>
+        </div>
+    </section>
+{% endblock %}
