@@ -1,0 +1,33 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Мои покупки · Дом и быт{% endblock %}
+
+{% block content %}
+    <section class="panel account" aria-labelledby="account-title">
+        <h1 id="account-title">Мои покупки</h1>
+        <p class="muted">{{ user.get_username }}</p>
+        <dl class="account-stats">
+            <div><dt>Покупок</dt><dd>{{ purchase_count }}</dd></div>
+            <div><dt>Скидка на следующую покупку</dt><dd>{{ discount }}%</dd></div>
+        </dl>
+        {% if purchases %}
+            <ul class="purchase-list" aria-label="История покупок">
+                {% for purchase in purchases %}
+                    <li>
+                        <div>
+                            <a href="{% url 'receipt' purchase.id %}">{{ purchase.product.name }}</a>
+                            <time class="muted" datetime="{{ purchase.date|date:'c' }}">{{ purchase.date|date:'d.m.Y H:i' }}</time>
+                        </div>
+                        <div class="purchase-totals">
+                            <strong>{{ purchase.total|floatformat:2 }} ₽</strong>
+                            <span class="muted">Скидка {{ purchase.discount_percent }}%</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Ваши покупки появятся здесь после оформления.</p>
+        {% endif %}
+        <a class="button" href="{% url 'index' %}">В каталог</a>
+    </section>
+{% endblock %}

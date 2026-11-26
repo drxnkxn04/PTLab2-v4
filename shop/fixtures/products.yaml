@@ -3,13 +3,61 @@
   fields:
     name: Стол
     price: 2000
+    category: Мебель
+    description: Компактный стол для кухни или рабочего места.
 - model: shop.product
   pk: 2
   fields:
     name: Стул
     price: 1000
+    category: Мебель
+    description: Деревянный стул со спинкой.
 - model: shop.product
   pk: 3
   fields:
     name: Табурет
     price: 500
+    category: Мебель
+    description: Лёгкий табурет для кухни.
+- model: shop.product
+  pk: 4
+  fields:
+    name: Корзина для белья
+    price: 1250
+    category: Хранение
+    description: Складная корзина из плотной ткани.
+- model: shop.product
+  pk: 5
+  fields:
+    name: Полотенце для рук
+    price: 390
+    category: Текстиль
+    description: Хлопковое полотенце размером 40 × 60 см.
+- model: shop.product
+  pk: 6
+  fields:
+    name: Контейнер для продуктов
+    price: 349
+    category: Кухня
+    description: Прозрачный контейнер на 1 л с герметичной крышкой.
+- model: shop.product
+  pk: 7
+  fields:
+    name: Набор салфеток из микрофибры
+    price: 269
+    category: Уборка
+    description: Три салфетки для сухой и влажной уборки.
+- model: shop.product
+  pk: 8
+  fields:
+    name: Бутылка для воды
+    price: 599
+    category: Кухня
+    description: Многоразовая бутылка объёмом 650 мл.
+- model: shop.product
+  pk: 9
+  fields:
+    name: Органайзер для ящика
+    price: 790
+    category: Хранение
+    description: Четыре отделения для хранения мелких вещей.

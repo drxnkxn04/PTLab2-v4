@@ -1,0 +1,16 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Вход · Дом и быт{% endblock %}
+
+{% block content %}
+    <section class="panel form-panel" aria-labelledby="login-title">
+        <h1 id="login-title">Войти</h1>
+        <form method="post" class="form-fields">
+            {% csrf_token %}
+            {{ form.as_div }}
+            {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+            <button class="button" type="submit">Войти</button>
+        </form>
+        <p>Впервые здесь? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+    </section>
+{% endblock %}

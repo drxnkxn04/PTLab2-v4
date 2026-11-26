@@ -1,0 +1,20 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Покупка оформлена · Дом и быт{% endblock %}
+
+{% block content %}
+    <section class="panel form-panel" aria-labelledby="receipt-title">
+        <h1 id="receipt-title">Покупка оформлена</h1>
+        <h2>{{ purchase.product.name }}</h2>
+        <dl class="summary">
+            <div><dt>Цена</dt><dd>{{ purchase.base_price|floatformat:2 }} ₽</dd></div>
+            <div><dt>Скидка</dt><dd>{{ purchase.discount_percent }}%</dd></div>
+            <div class="total"><dt>Итого</dt><dd>{{ purchase.total|floatformat:2 }} ₽</dd></div>
+            <div><dt>Адрес доставки</dt><dd>{{ purchase.address }}</dd></div>
+        </dl>
+        <div class="actions">
+            <a class="button" href="{% url 'index' %}">Продолжить покупки</a>
+            <a href="{% url 'account' %}">Мои покупки</a>
+        </div>
+    </section>
+{% endblock %}
